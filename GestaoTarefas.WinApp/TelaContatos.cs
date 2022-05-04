@@ -26,17 +26,16 @@ namespace GestaoTarefas.WinApp
             set
             {
                 contato = value;
-                textNome.Text = contato.nome;
+                textNome.Text = contato.Nome;
                 textEmail.Text = contato.email;
                 textTelefone.Text = contato.telefone;
                 comboCargo.Text = contato.empresa;
   
             }
         }
-
         private void botaoGravar_Click(object sender, EventArgs e)
         {
-            contato.nome = textNome.Text;
+            contato.Nome = textNome.Text;
             contato.email = textEmail.Text;
             contato.telefone = textTelefone.Text;
             contato.empresa = textEmpresa.Text;

@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace GestaoTarefas.WinApp
 {
-    public class Compromissos
+    [Serializable]
+
+    public class Compromissos : EntidadeBase
     {
         public string assunto;
         public string local;
         public string dataCompromisso;
+        public Contato contato;
 
-
+        public override string ToString()
+        {
+            return $"Compromisso {assunto} | Local: {local} | Dia {dataCompromisso} | " +
+                $"Contato: {contato.Nome}";
+        }
 
     }
 }

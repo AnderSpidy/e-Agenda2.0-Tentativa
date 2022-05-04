@@ -68,7 +68,7 @@
             // botaoGravar
             // 
             this.botaoGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.botaoGravar.Location = new System.Drawing.Point(255, 204);
+            this.botaoGravar.Location = new System.Drawing.Point(250, 121);
             this.botaoGravar.Name = "botaoGravar";
             this.botaoGravar.Size = new System.Drawing.Size(75, 23);
             this.botaoGravar.TabIndex = 4;
@@ -79,7 +79,7 @@
             // botaoCancelar
             // 
             this.botaoCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.botaoCancelar.Location = new System.Drawing.Point(336, 204);
+            this.botaoCancelar.Location = new System.Drawing.Point(331, 121);
             this.botaoCancelar.Name = "botaoCancelar";
             this.botaoCancelar.Size = new System.Drawing.Size(75, 23);
             this.botaoCancelar.TabIndex = 5;
@@ -95,6 +95,7 @@
             this.checkBoxBaixa.TabIndex = 6;
             this.checkBoxBaixa.Text = "Baixa";
             this.checkBoxBaixa.UseVisualStyleBackColor = true;
+            this.checkBoxBaixa.CheckedChanged += new System.EventHandler(this.checkBoxBaixa_CheckedChanged);
             // 
             // checkBoxNormal
             // 
@@ -139,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 239);
+            this.ClientSize = new System.Drawing.Size(422, 159);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textoNumero);
             this.Controls.Add(this.checkBoxAlta);

@@ -8,13 +8,18 @@ namespace GestaoTarefas.WinApp
     {
         private RepositorioTarefa repositorioTarefa;
         private RepositorioContato repositorioContato;
+        private RepositorioCompromisso repositorioCompromisso;
         public ListagemTarefasFormcs()
         {
             repositorioTarefa = new RepositorioTarefa();
             repositorioContato = new RepositorioContato();
+            repositorioCompromisso = new RepositorioCompromisso();
             InitializeComponent();
             CarreagarTarefas();
+            CarregarTarefasConcluidas();
             CarreagarContatos();
+            CarregarCompromissos();
+
 
         }
 
@@ -28,6 +33,17 @@ namespace GestaoTarefas.WinApp
                 caixaDeListaDeTarefas.Items.Add(t);
             }
         }
+        private void CarregarTarefasConcluidas()
+        {
+            List<Tarefa> tarefas = repositorioTarefa.SelecionarTodosConcluidos();
+            caixaDeListaDeTarefasConcluidas.Items.Clear();
+
+            foreach (Tarefa t in tarefas)
+            {
+
+                caixaDeListaDeTarefasConcluidas.Items.Add(t);
+            }
+        }
 
         private void CarreagarContatos()
         {
@@ -39,18 +55,40 @@ namespace GestaoTarefas.WinApp
                 caixaDeListaDeContatos.Items.Add(t);
             }
         }
+        private void CarregarCompromissos()
+        {
+            List<Compromissos> compromissos = repositorioCompromisso.SelecionarTodos();
+            caixadeListaDeCompromisso.Items.Clear();
+
+            foreach (Compromissos c in compromissos)
+            {
+                caixadeListaDeCompromisso.Items.Add(c);
+            }
+        }
 
         private void botaoInserir_Click(object sender, EventArgs e)
         {
             CadastroTarefa tela = new CadastroTarefa();
+            
             tela.Tarefa = new Tarefa();
-            DialogResult resultado = tela.ShowDialog();
+            DialogResult resultado =DialogResult.None;
+            do
+            {
+                resultado = tela.ShowDialog();
+                if (resultado == DialogResult.Cancel)
+                    break;
+
+
+            } while (tela.Tarefa.Titulo == null);
+            
 
             if(resultado == DialogResult.OK)
             {
                 repositorioTarefa.Inserir(tela.Tarefa);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
             }
         }
     
@@ -72,7 +110,9 @@ namespace GestaoTarefas.WinApp
             {
                 repositorioTarefa.Editar(tela.Tarefa);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
 
             }
         }
@@ -93,13 +133,13 @@ namespace GestaoTarefas.WinApp
             {
                 repositorioTarefa.Excluir(tarefaSelecionada);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
 
 
             }
         }
-
-      
 
         private void botaoCadastrarItens_Click(object sender, EventArgs e)
         {
@@ -119,7 +159,9 @@ namespace GestaoTarefas.WinApp
                 repositorioTarefa.AdicionarItens(tarefaSelecionada, itens);
 
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
 
             }
         }
@@ -141,7 +183,9 @@ namespace GestaoTarefas.WinApp
 
                 repositorioTarefa.AtualizarItens(tarefaSelecionada, itensConcluidos, itensPendentes);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
 
 
             }
@@ -157,7 +201,9 @@ namespace GestaoTarefas.WinApp
             {
                 repositorioContato.Inserir(tela.Contato);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
 
             }
         }
@@ -172,14 +218,16 @@ namespace GestaoTarefas.WinApp
                 "Edição de Contatos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
             tela.Contato = contatoSelecionado;
-            DialogResult resultado = tela.ShowDialog();
+            DialogResult resultado = DialogResult.None;
             if (resultado == DialogResult.OK)
             {
                 repositorioContato.Editar(tela.Contato);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
+
             }
 
         }
@@ -200,9 +248,103 @@ namespace GestaoTarefas.WinApp
             {
                 repositorioContato.Excluir(contatoSelecionado);
                 CarreagarTarefas();
+                CarregarTarefasConcluidas();
                 CarreagarContatos();
+                CarregarCompromissos();
+
             }
 
         }
+
+        private void botaoInserirCompromissos_Click(object sender, EventArgs e)
+        {
+            Contato contatoSelecionado = (Contato)caixaDeListaDeContatos.SelectedItem;
+            
+            if (contatoSelecionado == null)
+            {
+                MessageBox.Show("Selecione um Contato Primeiro!!!",
+                "Edição de Compromissos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            CadastroCompromisso tela = new CadastroCompromisso(contatoSelecionado);
+            tela.Compromissos = new Compromissos();
+            tela.Compromissos.contato = contatoSelecionado;
+            DialogResult resultado = DialogResult.None;
+            do
+            {
+                resultado = tela.ShowDialog();
+                if (resultado == DialogResult.Cancel)
+                    break;
+
+
+            } while (tela.Compromissos.assunto == null || tela.Compromissos.local == null ||tela.Compromissos.dataCompromisso == null);
+
+
+
+            if (resultado == DialogResult.OK)
+            {
+                repositorioCompromisso.Inserir(tela.Compromissos);
+                CarreagarTarefas();
+                CarregarTarefasConcluidas();
+                CarreagarContatos();
+                CarregarCompromissos();
+
+
+            }
+
+
+
+        }
+
+        private void botaoEditarCompromissos_Click(object sender, EventArgs e)
+        {
+            Compromissos compromissoSelecionado = (Compromissos)caixadeListaDeCompromisso.SelectedItem;
+            CadastroCompromisso tela = new CadastroCompromisso();
+            if (compromissoSelecionado == null)
+            {
+                MessageBox.Show("Selecione um Compromisso Primeiro!!!",
+                "Edição de Compromisso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            tela.Compromissos = compromissoSelecionado;
+            DialogResult resultado = tela.ShowDialog();
+            if (resultado == DialogResult.OK)
+            {
+                repositorioCompromisso.Editar(tela.Compromissos);
+                CarreagarTarefas();
+                CarregarTarefasConcluidas();
+                CarreagarContatos();
+                CarregarCompromissos();
+
+            }
+
+        }
+
+        private void botaoExcluirCompromissos_Click(object sender, EventArgs e)
+        {
+            Compromissos compromissoSelecionado = (Compromissos)caixadeListaDeCompromisso.SelectedItem;
+            if (compromissoSelecionado == null)
+            {
+                MessageBox.Show("Selecione um Compromisso Primeiro!!!",
+                "Exclusão de Compromisso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            DialogResult resultado = MessageBox.Show("Deseja Realmente excluir o Compromisso?",
+                "Exclusão de Compromisso", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (resultado == DialogResult.OK)
+            {
+                repositorioCompromisso.Excluir(compromissoSelecionado);
+                CarreagarTarefas();
+                CarregarTarefasConcluidas();
+                CarreagarContatos();
+                CarregarCompromissos();
+
+            }
+
+        }
+
+       
     }
 }

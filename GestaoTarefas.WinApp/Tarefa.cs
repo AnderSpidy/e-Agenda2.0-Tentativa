@@ -32,20 +32,21 @@ namespace GestaoTarefas.WinApp
         public override string ToString()
         {
             var percentual = CalcularPercentualConcluido();
-            string strPrioridade;
+            string strPrioridade="";
             if (Prioridade == 3)
                 strPrioridade = "ALTA";
-            if (Prioridade == 2)
+            else if (Prioridade == 2)
                 strPrioridade = "NORMAL";
+
             else strPrioridade = "BAIXO";
 
             if (DataConclusao.HasValue)
             {
-                return $"Tarefa: {Numero} | Título: {Titulo} | Prioridade: {strPrioridade}" +
+                return $"Título: {Titulo} | Prioridade: {strPrioridade}" +
                 $" | Conclusão: {DataConclusao.Value.ToShortDateString()}";
             }
 
-            return $"Tarefa: {Numero} | Título: {Titulo} | Prioridade: {strPrioridade}" +
+            return $"Título: {Titulo} | Prioridade: {strPrioridade}" +
                 $" | Criação: {DataCriacao.ToShortDateString()}" +
                 $" | Conclusão: {percentual} %";
         }

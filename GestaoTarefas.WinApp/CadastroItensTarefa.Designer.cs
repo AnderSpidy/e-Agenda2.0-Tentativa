@@ -57,7 +57,6 @@
             this.botaoGravar.TabIndex = 6;
             this.botaoGravar.Text = "Gravar";
             this.botaoGravar.UseVisualStyleBackColor = true;
-            this.botaoGravar.Click += new System.EventHandler(this.botaoGravar_Click);
             // 
             // txtTitulo
             // 

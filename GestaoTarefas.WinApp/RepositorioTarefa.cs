@@ -24,7 +24,17 @@ namespace GestaoTarefas.WinApp
 
         public List<Tarefa> SelecionarTodos()
         {
-            return tarefas;
+            List<Tarefa> tarefaspendentes = tarefas.FindAll(x => x.CalcularPercentualConcluido() != 100);
+            return tarefaspendentes.OrderBy(x => x.Prioridade).Reverse().ToList();
+
+
+        }
+
+        public List<Tarefa> SelecionarTodosConcluidos()
+        {
+            List<Tarefa> tarefasConcluidas = tarefas.FindAll(x => x.CalcularPercentualConcluido() == 100);
+
+            return tarefasConcluidas.OrderBy(x => x.Prioridade).Reverse().ToList();
         }
        
         

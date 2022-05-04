@@ -10,11 +10,13 @@ namespace GestaoTarefas.WinApp
 
     public class Contato : EntidadeBase
     {
-        public string nome;
+        private string nome;
         public string email;
         public string telefone;
         public string empresa;
         public string cargo;
+
+        public string Nome { get => nome; set => nome = value; }
 
         public override string ToString()
         {

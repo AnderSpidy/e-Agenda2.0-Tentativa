@@ -32,11 +32,6 @@ namespace GestaoTarefas.WinApp
             } 
         }
 
-        private void botaoGravar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void botaoAdicionar_Click(object sender, EventArgs e)
         {
             List<string> titulos = ItensAdicionados.Select(x => x.Titulo).ToList();

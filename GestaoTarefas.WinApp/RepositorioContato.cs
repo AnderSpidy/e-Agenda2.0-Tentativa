@@ -21,8 +21,7 @@ namespace GestaoTarefas.WinApp
             contador = registros.Count;
         }
 
-
-        //Crud -------------------------------------------------------------
+            
         public override void Inserir(Contato contato)
         {
             contato.Numero = ++contador;
@@ -36,7 +35,7 @@ namespace GestaoTarefas.WinApp
             {
                 if (item.Numero == contato.Numero)
                 {
-                    item.nome = contato.nome;
+                    item.Nome = contato.Nome;
                     item.email = contato.email;
                     item.telefone = contato.telefone;
                     item.empresa = contato.empresa;
@@ -51,7 +50,7 @@ namespace GestaoTarefas.WinApp
         {
             foreach (var item in registros)
             {
-                if (item.nome == nome)
+                if (item.Nome == nome)
                 {
                     //item.compromisso = true;
                     break;
@@ -69,7 +68,6 @@ namespace GestaoTarefas.WinApp
             GravarRegistrosEmArquivo();
         }
         
-        //Metodos ----------------------------------------------------------
         public List<Contato> SelecionarTodos()
         {
             contatos = new List<Contato>();
