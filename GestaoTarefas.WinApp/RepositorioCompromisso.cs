@@ -33,9 +33,11 @@ namespace GestaoTarefas.WinApp
             {
                 if (item.Numero == compromisso.Numero)
                 {
-                    item.assunto = compromisso.assunto;
-                    item.local = compromisso.local;
-                    item.dataCompromisso = compromisso.dataCompromisso;
+                    item.Assunto = compromisso.Assunto;
+                    item.Local = compromisso.Local;
+                    item.DataCompromisso = compromisso.DataCompromisso;
+                    item.HoraInicio = compromisso.HoraInicio;
+                    item.HoraTermino = compromisso.HoraTermino;
                     break;
                 }
             }
@@ -44,6 +46,7 @@ namespace GestaoTarefas.WinApp
 
         public override void Excluir(Compromissos compromisso)
         {
+            compromisso.Contato.compromisso = false;
             registros.Remove(compromisso);
             GravarRegistrosEmArquivo();
         }

@@ -33,9 +33,11 @@ namespace GestaoTarefas.WinApp
             set
             {
                 compromisso = value;
-               textoAssunto.Text = compromisso.assunto;
-                textoLocal.Text = compromisso.local;
-                textoData.Text = compromisso.dataCompromisso;
+               textoAssunto.Text = compromisso.Assunto;
+                textoLocal.Text = compromisso.Local;
+                textoData.Text = compromisso.DataCompromisso.ToString();
+                textoInicio.Text = compromisso.HoraInicio.ToString();
+                textoTermino.Text = compromisso.HoraTermino.ToString();
                //labelCompromisso.Text = compromisso.contato.Nome;
 
                 //NÃO TA FUNCIONANDO direito para inserir novos contatos NAO SEI O PORQUÊ talvez eu esteja cansado e nao consiga perceber 
@@ -53,11 +55,16 @@ namespace GestaoTarefas.WinApp
 
             }
             else { 
-            compromisso.assunto = textoAssunto.Text;
-            compromisso.local = textoLocal.Text;
-            compromisso.dataCompromisso = textoData.Text;
+            compromisso.Assunto = textoAssunto.Text;
+            compromisso.Local = textoLocal.Text;
+            compromisso.DataCompromisso = Convert.ToDateTime(textoData.Text);
+                compromisso.HoraInicio = TimeSpan.Parse(textoInicio.Text);
+                compromisso.HoraTermino = TimeSpan.Parse(textoTermino.Text);
+                compromisso.Contato.compromisso = true;
             }
             
         }
+
+       
     }
 }

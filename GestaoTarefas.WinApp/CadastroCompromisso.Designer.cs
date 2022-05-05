@@ -38,12 +38,16 @@
             this.textoAssunto = new System.Windows.Forms.TextBox();
             this.textoLocal = new System.Windows.Forms.TextBox();
             this.textoData = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textoInicio = new System.Windows.Forms.TextBox();
+            this.textoTermino = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // botaoCancelar
             // 
             this.botaoCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.botaoCancelar.Location = new System.Drawing.Point(209, 127);
+            this.botaoCancelar.Location = new System.Drawing.Point(202, 173);
             this.botaoCancelar.Name = "botaoCancelar";
             this.botaoCancelar.Size = new System.Drawing.Size(75, 23);
             this.botaoCancelar.TabIndex = 13;
@@ -53,7 +57,7 @@
             // botaoGravar
             // 
             this.botaoGravar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.botaoGravar.Location = new System.Drawing.Point(128, 127);
+            this.botaoGravar.Location = new System.Drawing.Point(121, 173);
             this.botaoGravar.Name = "botaoGravar";
             this.botaoGravar.Size = new System.Drawing.Size(75, 23);
             this.botaoGravar.TabIndex = 12;
@@ -128,11 +132,47 @@
             this.textoData.Size = new System.Drawing.Size(130, 23);
             this.textoData.TabIndex = 23;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(43, 118);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 15);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Horario de Inicio:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(29, 147);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(112, 15);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Horario de Término:";
+            // 
+            // textoInicio
+            // 
+            this.textoInicio.Location = new System.Drawing.Point(147, 115);
+            this.textoInicio.Name = "textoInicio";
+            this.textoInicio.Size = new System.Drawing.Size(130, 23);
+            this.textoInicio.TabIndex = 26;
+            // 
+            // textoTermino
+            // 
+            this.textoTermino.Location = new System.Drawing.Point(147, 144);
+            this.textoTermino.Name = "textoTermino";
+            this.textoTermino.Size = new System.Drawing.Size(130, 23);
+            this.textoTermino.TabIndex = 27;
+            // 
             // CadastroCompromisso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 160);
+            this.ClientSize = new System.Drawing.Size(299, 206);
+            this.Controls.Add(this.textoTermino);
+            this.Controls.Add(this.textoInicio);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.textoData);
             this.Controls.Add(this.textoLocal);
             this.Controls.Add(this.textoAssunto);
@@ -162,5 +202,9 @@
         private System.Windows.Forms.TextBox textoAssunto;
         private System.Windows.Forms.TextBox textoLocal;
         private System.Windows.Forms.TextBox textoData;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textoInicio;
+        private System.Windows.Forms.TextBox textoTermino;
     }
 }

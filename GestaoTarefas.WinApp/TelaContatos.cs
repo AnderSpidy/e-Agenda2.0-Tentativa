@@ -35,6 +35,7 @@ namespace GestaoTarefas.WinApp
         }
         private void botaoGravar_Click(object sender, EventArgs e)
         {
+
             contato.Nome = textNome.Text;
             contato.email = textEmail.Text;
             contato.telefone = textTelefone.Text;

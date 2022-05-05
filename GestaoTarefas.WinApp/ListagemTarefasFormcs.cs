@@ -49,6 +49,7 @@ namespace GestaoTarefas.WinApp
         {
             List<Contato> contatos = repositorioContato.SelecionarTodos();
             caixaDeListaDeContatos.Items.Clear();
+            
 
             foreach (Contato t in contatos)
             {
@@ -195,7 +196,27 @@ namespace GestaoTarefas.WinApp
         {
             TelaContatos tela = new TelaContatos();
             tela.Contato = new Contato();
-            DialogResult resultado = tela.ShowDialog();
+            DialogResult resultado = DialogResult.None;
+
+            string resultadoValidacao = "";
+            do
+            {
+                resultado = tela.ShowDialog();
+                resultadoValidacao = tela.Contato.Validar();
+                if (resultado == DialogResult.Cancel)
+                    break;
+            
+            if (resultadoValidacao != "REGISTRO_VALIDO")
+            {
+                MessageBox.Show(resultadoValidacao,
+                "Edição de Contatos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            else
+            {
+                MessageBox.Show("Contato cadastrado com sucesso!",
+                "Edição de Contatos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            } while (resultadoValidacao != "REGISTRO_VALIDO");
 
             if (resultado == DialogResult.OK)
             {
@@ -235,12 +256,20 @@ namespace GestaoTarefas.WinApp
         private void botaoExcluirContato_Click(object sender, EventArgs e)
         {
             Contato contatoSelecionado = (Contato)caixaDeListaDeContatos.SelectedItem;
+           
             if (contatoSelecionado == null)
             {
                 MessageBox.Show("Selecione um Contato Primeiro!!!",
                 "Exclusão de Contato", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            else if (contatoSelecionado.compromisso == true)
+            {
+                MessageBox.Show("Não é possivel excluir um contato que tenha um compromisso",
+               "Exclusão de Contato", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
 
             DialogResult resultado = MessageBox.Show("Deseja Realmente excluir o Contato?",
                 "Exclusão de Contato", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -266,18 +295,34 @@ namespace GestaoTarefas.WinApp
                 "Edição de Compromissos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             CadastroCompromisso tela = new CadastroCompromisso(contatoSelecionado);
             tela.Compromissos = new Compromissos();
-            tela.Compromissos.contato = contatoSelecionado;
+            tela.Compromissos.Contato = contatoSelecionado;
             DialogResult resultado = DialogResult.None;
+            
+            string resultadoValidacao = "";
             do
             {
                 resultado = tela.ShowDialog();
+                //resultado = tela.ShowDialog();
+                //if (resultado == DialogResult.Cancel)
+                //    break;
+                resultadoValidacao = tela.Compromissos.Validar();
                 if (resultado == DialogResult.Cancel)
                     break;
 
-
-            } while (tela.Compromissos.assunto == null || tela.Compromissos.local == null ||tela.Compromissos.dataCompromisso == null);
+                if (resultadoValidacao != "REGISTRO_VALIDO")
+                {
+                    MessageBox.Show(resultadoValidacao,
+                    "Edição de Compromisso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    MessageBox.Show("Compromisso cadastrado com sucesso!",
+                    "Edição de Contatos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            } while (resultadoValidacao != "REGISTRO_VALIDO");
 
 
 

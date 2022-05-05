@@ -52,7 +52,7 @@ namespace GestaoTarefas.WinApp
             {
                 if (item.Nome == nome)
                 {
-                    //item.compromisso = true;
+                    item.compromisso = true;
                     break;
                 }
             }
@@ -61,23 +61,28 @@ namespace GestaoTarefas.WinApp
         
         public override void Excluir(Contato contato)
         {
-           // if (contato.compromisso == false)
-            //{
+            if (contato.compromisso == false)
+            {
                 registros.Remove(contato);
-            //}
+            }
             GravarRegistrosEmArquivo();
         }
         
         public List<Contato> SelecionarTodos()
         {
             contatos = new List<Contato>();
+            
+          
 
             foreach (Contato c in registros)
             {
+                
                 contatos.Add(c);
+                
             }
             return contatos;
         }
+        
 
         public void GravarRegistrosEmArquivo()
         {
